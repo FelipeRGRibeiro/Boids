@@ -1,0 +1,30 @@
+fileFormatVersion: 2
+guid: c2da2fbb1d914bd4994faa7cacf4c61e
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - repulsionRadius: {instanceID: 0}
+  - repulsionConstant: {instanceID: 0}
+  - alignmentRadius: {instanceID: 0}
+  - alignmentConstant: {instanceID: 0}
+  - cohesionRadius: {instanceID: 0}
+  - cohesionConstant: {instanceID: 0}
+  - numBoids: {instanceID: 0}
+  - repulsionRadiusText: {instanceID: 0}
+  - repulsionConstantText: {instanceID: 0}
+  - alignmentRadiusText: {instanceID: 0}
+  - alignmentConstantText: {instanceID: 0}
+  - cohesionRadiusText: {instanceID: 0}
+  - cohesionConstantText: {instanceID: 0}
+  - numBoidsText: {instanceID: 0}
+  - target: {fileID: 5216913764050826575, guid: 93eded7868221e8448ee66d290821b5a,
+      type: 3}
+  - avoid: {fileID: 3654011854649209191, guid: 3cc9370b698cbdc4796da068af587c6a, type: 3}
+  - boids_prefab: {fileID: 5012169317618561799, guid: 17f3594ed01c6084b9310b1be429e54f,
+      type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
