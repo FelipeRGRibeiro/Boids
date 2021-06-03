@@ -1,5 +1,5 @@
 ## Project name
-Boids 2D
+BOIDS2D
 
 ## Table of contents
 * [General info](#general-info)
