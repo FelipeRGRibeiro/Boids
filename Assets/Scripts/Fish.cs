@@ -20,7 +20,7 @@ public class Fish : MonoBehaviour
     }
     public void SetPosition(Vector2 pos)
     {
-        SetAngle(pos-GetPosition());
+        SetAngle(pos - GetPosition());
         this.transform.position = new Vector3(pos.x, pos.y, 0);
     }
     public void SetAngle(Vector2 pos)
@@ -33,5 +33,4 @@ public class Fish : MonoBehaviour
             transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         }
     }
-
 }

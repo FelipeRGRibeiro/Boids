@@ -6,27 +6,26 @@ using UnityEngine.UI;
 
 public class Boids2D : MonoBehaviour
 {
-    public Slider repulsionRadius;
-    public Slider repulsionConstant;
-    public Slider alignmentRadius;
-    public Slider alignmentConstant;
-    public Slider cohesionRadius;
-    public Slider cohesionConstant;
-    public Slider numBoids;
-    public Text repulsionRadiusText;
-    public Text repulsionConstantText;
-    public Text alignmentRadiusText;
-    public Text alignmentConstantText;
-    public Text cohesionRadiusText;
-    public Text cohesionConstantText;
-    public Text numBoidsText;
-
+//UI Elements
+    private Slider repulsionRadius;
+    private Slider repulsionConstant;
+    private Slider alignmentRadius;
+    private Slider alignmentConstant;
+    private Slider cohesionRadius;
+    private Slider cohesionConstant;
+    private Slider numBoids;
+    private Text repulsionRadiusText;
+    private Text repulsionConstantText;
+    private Text alignmentRadiusText;
+    private Text alignmentConstantText;
+    private Text cohesionRadiusText;
+    private Text cohesionConstantText;
+    private Text numBoidsText;
 
     private const float xborder = 3;
     private const float yborder = 1.5f;
     private int num_boids = 10;
-    private int prev_num_boids = 10;
-
+    
     public GameObject target;
     private Vector2 kTarget;
     private float kTargetRadius;
@@ -37,12 +36,12 @@ public class Boids2D : MonoBehaviour
 
     private float kDeltaT;
     private const float boidSize = 0.16f;
-    // Forces influence radius: repulsion < alignment < cohesion
+// Forces influence radius: repulsion < alignment < cohesion
     private float kRepulsionRadius = 1f;
     private float kAlignmentRadius = 3.5f;
     private float kCohesionRadius = 6f;
 
-    // Forcer constants
+// Forces constants
     private float kRepulsionConstant = 1f;
     private float kAlignmentConstant = .3f;
     private float kCohesionConstant = .6f;
@@ -54,11 +53,54 @@ public class Boids2D : MonoBehaviour
 
     private float updateTime = 0f;
 /*
-* Instantiate boids at random positions and velocities 
+* Load and start sliders and instantiate/create boids
 */
     private void Start()
     {
-        SliderStart();
+        UILoad();
+        SlidersStart();
+        CreateBoids();
+    }
+/*
+ * Load sliders and texts at runtime
+ */
+    void UILoad()
+    {
+        repulsionRadius = GameObject.Find("RepulsionR").GetComponent<Slider>();
+        repulsionConstant = GameObject.Find("RepulsionK").GetComponent<Slider>();
+        alignmentRadius = GameObject.Find("AlignmentR").GetComponent<Slider>();
+        alignmentConstant = GameObject.Find("AlignmentK").GetComponent<Slider>();
+        cohesionRadius = GameObject.Find("CohesionR").GetComponent<Slider>();
+        cohesionConstant = GameObject.Find("CohesionK").GetComponent<Slider>();
+        numBoids = GameObject.Find("NumBoids").GetComponent<Slider>();
+        repulsionRadiusText = GameObject.Find("RepRadiusText").GetComponent<Text>();
+        repulsionConstantText = GameObject.Find("RepConstText").GetComponent<Text>();
+        alignmentRadiusText = GameObject.Find("AlignRadiusText").GetComponent<Text>();
+        alignmentConstantText = GameObject.Find("AlignConstText").GetComponent<Text>();
+        cohesionRadiusText = GameObject.Find("CoheRadiusText").GetComponent<Text>();
+        cohesionConstantText = GameObject.Find("CoheConstText").GetComponent<Text>();
+        numBoidsText = GameObject.Find("NumBoidsText").GetComponent<Text>();
+    }
+/*
+* Sliders start value
+*/
+    void SlidersStart()
+    {
+        repulsionRadius.value = kRepulsionRadius;
+        alignmentRadius.value = kAlignmentRadius;
+        cohesionRadius.value = kCohesionRadius;
+
+        repulsionConstant.value = kRepulsionConstant;
+        alignmentConstant.value = kAlignmentConstant;
+        cohesionConstant.value = kCohesionConstant;
+
+        numBoids.value = num_boids;
+    }
+/*
+ * Instantiate boids at random positions and velocities 
+ */
+    private void CreateBoids()
+    {
         Vector2 pos;
         kDeltaT = Time.deltaTime;
         pos = new Vector2(Random.Range(-xborder, xborder), Random.Range(-yborder, yborder));
@@ -75,7 +117,7 @@ public class Boids2D : MonoBehaviour
                 pos = new Vector2(Random.Range(-xborder, xborder), Random.Range(-yborder, yborder));
             }
             boid[i].GetComponent<Fish>().SetPosition(pos);
-            boid[i].GetComponent<Fish>().SetVelocity(Vector2.ClampMagnitude(new Vector2(Random.Range(-kDeltaT, kDeltaT), Random.Range(-kDeltaT, kDeltaT)), 1f));
+            boid[i].GetComponent<Fish>().SetVelocity(Vector2.ClampMagnitude(new Vector2(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f)), 1f));
         }
     }
 /*
@@ -113,52 +155,19 @@ public class Boids2D : MonoBehaviour
         numBoidsText.text = "Number of boids: " + Mathf.RoundToInt(numBoids.value).ToString("F1");
         if (temp_num_boids != num_boids)
         {
-            prev_num_boids = num_boids;
             num_boids = temp_num_boids;
-            if (num_boids > prev_num_boids)
+            foreach(GameObject Boids in boid)
             {
-                for (int i = prev_num_boids; i < num_boids; i++)
-                {
-                    boid.Add(GameObject.Instantiate(boids_prefab));
-                    Vector2 pos = new Vector2(Random.Range(-xborder, xborder), Random.Range(-yborder, yborder));
-                    while (Vector2.SqrMagnitude(pos - kAvoidCenter) <= kAvoidSize)
-                    {
-                        pos = new Vector2(Random.Range(-xborder, xborder), Random.Range(-yborder, yborder));
-                    }
-                    boid[i].GetComponent<Fish>().SetPosition(pos);
-                    boid[i].GetComponent<Fish>().SetVelocity(Vector2.ClampMagnitude(new Vector2(Random.Range(-kDeltaT, kDeltaT), Random.Range(-kDeltaT, kDeltaT)), 1f));
-                }
+                Destroy(Boids.gameObject);
             }
-            else
-            {
-                for (int i = num_boids; i < prev_num_boids; i++)
-                {
-                    Destroy(boid[i-1].gameObject);
-                }
-                boid.RemoveRange(num_boids, prev_num_boids - 1);
-                Debug.Log("Qnt boids: "+boid.Count);
-            }
+            boid.Clear();
+            CreateBoids();
         }
     }
-    /*
-     * Sliders start value
-     */
-    void SliderStart()
-    {
-        repulsionRadius.value = kRepulsionRadius;
-        alignmentRadius.value = kAlignmentRadius;
-        cohesionRadius.value = kCohesionRadius;
-
-        repulsionConstant.value = kRepulsionConstant;
-        alignmentConstant.value = kAlignmentConstant;
-        cohesionConstant.value = kCohesionConstant;
-
-        numBoids.value = num_boids;
-    }
-    /*
-    * Update boids positions, based on separation, alignment,
-    * cohesion and target forces.Bounds position to universe limits.
-    */
+/*
+* Update boids positions, based on separation, alignment, cohesion and target forces.
+* Bounds position to universe limits.
+*/
     void MoveBoids()
     {
         Vector2 v1;
@@ -216,7 +225,7 @@ public class Boids2D : MonoBehaviour
         if (numNeighbors == 0) return resultantVector;
         resultantVector /= numNeighbors;
         resultantVector -= currentPosition;
-        resultantVector = Vector2.ClampMagnitude(resultantVector, 1f) * kCohesionConstant;
+        resultantVector *= kCohesionConstant;
         return resultantVector;
     }
 /*
@@ -236,12 +245,12 @@ public class Boids2D : MonoBehaviour
             if (Mathf.Abs(Vector2.Distance(currentPosition, otherPosition)) < kRepulsionRadius && Mathf.Abs(Vector3.Distance(currentPosition, otherPosition)) > 0)
             {
                 numNeighbors++;
-                resultantVector += (currentPosition - otherPosition);
+                resultantVector += (currentPosition - otherPosition)/Mathf.Pow(Vector2.Distance(currentPosition, otherPosition), 2);
             }
         }
         if (numNeighbors == 0) return resultantVector;
 
-        resultantVector = Vector2.ClampMagnitude(resultantVector, 1f) * kRepulsionConstant;
+        resultantVector *= kRepulsionConstant/numNeighbors;
         return resultantVector;
     }
 /*
@@ -268,8 +277,7 @@ public class Boids2D : MonoBehaviour
 
         if (numNeighbors == 0) return resultantVector;
 
-        resultantVector /= numNeighbors;
-        resultantVector = Vector2.ClampMagnitude(resultantVector, 1f) * kAlignmentConstant;
+        resultantVector *= kAlignmentConstant/numNeighbors;
         return resultantVector;
     }
 /*
@@ -299,6 +307,9 @@ public class Boids2D : MonoBehaviour
         resultantVector = rotation * kTargetRotation - centripetal * kTargetCentripetal;
         return resultantVector;
     }
+/*
+ * Calculate particle pseudo-random changes
+ */ 
     Vector2 RandomChange(Vector2 vel)
     {
         Vector2 resultantVector = vel;

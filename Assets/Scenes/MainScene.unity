@@ -326,7 +326,7 @@ GameObject:
   - component: {fileID: 311363071}
   - component: {fileID: 311363072}
   m_Layer: 5
-  m_Name: PredatorS
+  m_Name: AvoidS
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -614,6 +614,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5216913764050826562, guid: 93eded7868221e8448ee66d290821b5a,
         type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5216913764050826562, guid: 93eded7868221e8448ee66d290821b5a,
+        type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -629,6 +634,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5216913764050826562, guid: 93eded7868221e8448ee66d290821b5a,
         type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5216913764050826562, guid: 93eded7868221e8448ee66d290821b5a,
+        type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
@@ -641,16 +651,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5216913764050826562, guid: 93eded7868221e8448ee66d290821b5a,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5216913764050826562, guid: 93eded7868221e8448ee66d290821b5a,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5216913764050826562, guid: 93eded7868221e8448ee66d290821b5a,
         type: 3}
@@ -2435,6 +2435,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3654011854649209194, guid: 3cc9370b698cbdc4796da068af587c6a,
         type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3654011854649209194, guid: 3cc9370b698cbdc4796da068af587c6a,
+        type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -2450,6 +2455,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3654011854649209194, guid: 3cc9370b698cbdc4796da068af587c6a,
         type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3654011854649209194, guid: 3cc9370b698cbdc4796da068af587c6a,
+        type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
@@ -2462,16 +2472,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3654011854649209194, guid: 3cc9370b698cbdc4796da068af587c6a,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3654011854649209194, guid: 3cc9370b698cbdc4796da068af587c6a,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3654011854649209194, guid: 3cc9370b698cbdc4796da068af587c6a,
         type: 3}
@@ -2584,7 +2584,7 @@ GameObject:
   - component: {fileID: 1253130923}
   - component: {fileID: 1253130922}
   m_Layer: 5
-  m_Name: PredatorSText
+  m_Name: AvoidSText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2843,20 +2843,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2da2fbb1d914bd4994faa7cacf4c61e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  repulsionRadius: {fileID: 389433456}
-  repulsionConstant: {fileID: 1272627346}
-  alignmentRadius: {fileID: 1728266850}
-  alignmentConstant: {fileID: 615172198}
-  cohesionRadius: {fileID: 451167314}
-  cohesionConstant: {fileID: 793226391}
-  numBoids: {fileID: 1920617988}
-  repulsionRadiusText: {fileID: 1684470628}
-  repulsionConstantText: {fileID: 779617898}
-  alignmentRadiusText: {fileID: 462992658}
-  alignmentConstantText: {fileID: 1165383888}
-  cohesionRadiusText: {fileID: 1843155223}
-  cohesionConstantText: {fileID: 1386416971}
-  numBoidsText: {fileID: 1884662209}
   target: {fileID: 63154413}
   avoid: {fileID: 1549979411}
   boids_prefab: {fileID: 5012169317618561799, guid: 17f3594ed01c6084b9310b1be429e54f,
